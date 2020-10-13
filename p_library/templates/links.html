@@ -8,6 +8,7 @@
     {% extends 'base.html' %}
 
     {% block content %}
+    {% if user.is_authenticated %}
     <div class="ml-5 mr-5 mt-5 text-center list-group list-group-flush">
         <h4 class="alert alert-dark">
             {% if user.is_superuser %}
@@ -23,6 +24,11 @@
             <a class="list-group-item text-info" href="/friends/">Список друзей, одолживших книги</a>
         </h4>
     </div>
+    {% else %}
+    <h4 class="mt-5 text-center">Для доступа к библиотеке необходимо <a href="/accounts/signup">зарегистрироваться</a>
+        или <a href="/accounts/login">войти на сайт</a>!</h4>
+    <p class="mt-2 text-center">* Войти на сайт можно через аккаунт на GitHub.</p>
+    {% endif %}
     {% endblock %}
 </body>
 </html>
