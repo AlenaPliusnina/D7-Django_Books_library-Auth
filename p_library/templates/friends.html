@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Friends</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h3 class="text-center mt-3 mb-3">{{ title }}</h3>
+
+    <ul class="d-flex justify-content-center list-group">
+		{% for friend in friends %}
+		    <li class="list-group-item list-group-item-info">{{ friend.full_name }}:
+				{% if user.is_superuser %}
+				    <a class="text-primary" href='friend_edith/{{ friend.id }}'>Edith</a>
+				    <a class="text-danger" href='friend_edith/{{ friend.id }}/delete'>Delete</a>
+				{% endif %}
+				<ul>
+					{% for book in friend.book.all %}
+					    <li> {{ book.author }}: "{{ book.title}}".</li>
+					{% endfor %}
+				</ul>
+			</li>
+		{% endfor %}
+	</ul>
+
+    {% if user.is_superuser %}
+            <div class="ml-3 mt-3">
+				<a class="btn btn-primary" href="create/">Добавить нового друга</a>
+			</div>
+	{% endif %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create friend</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div class="ml-3">
+        <form method="post">
+	        {% csrf_token %}
+	        {{ form.as_p }}
+            <input type="submit" value="Сохранить">
+        </form>
+        <br>
+        * Зажмите ctrl/cmd, чтобы выбрать несколько книг.
+    </div>
+    {% endblock %}
+</body>
+</html>

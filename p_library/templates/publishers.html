@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Publishers</title>
+</head>
+<body class="bg-light">
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h3 class="text-center mt-3 mb-3">{{ title }}</h3>
+    
+    <ul class="d-flex justify-content-center list-group">
+        {% for publisher in publishers %}
+            <li class="list-group-item list-group-item-info">{{ publisher }}:
+                <ul> {% for book in books %} 
+                    {% if book.publisher == publisher %} 
+                        <li>{{ book.title }}</li>
+                    {% endif %}
+                {% endfor %} </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endblock %}
+</body>
+</html>
+

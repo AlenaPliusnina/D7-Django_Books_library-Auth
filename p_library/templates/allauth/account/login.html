@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<div class="mx-auto mt-5" style="width: 450px;">
+  <h1 class="text-center">{% trans "Войти" %}</h1>
+
+  {% get_providers as socialaccount_providers %}
+
+  {% if socialaccount_providers %}
+  <p>{% blocktrans %}Пожалуйста, войдите через один из доступных аккаунтов:{% endblocktrans %}</p>
+
+  <div class="socialaccount_ballot">
+
+    <ul class="socialaccount_providers">
+      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </ul>
+
+    <div class="login-or"><p>{% blocktrans with site.name as site_name %} Или, <a href="{{ signup_url }}">
+      зарегестрируйтесь</a> на {{ site_name }} и войдите через форму ниже:{% endblocktrans %}</p>
+    </div>
+
+  </div>
+
+  {% include "socialaccount/snippets/login_extra.html" %}
+
+  {% else %}
+  <p>{% blocktrans %}Если у вас еще нет аккаунта, для начала, пожалуйста,
+  <a href="{{ signup_url }}">зарегестрируйтесь</a>.{% endblocktrans %}</p>
+  {% endif %}
+
+  <form class="login" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <div class="d-flex justify-content-center">
+          <button class="ml-3 btn btn-primary primaryAction" type="submit">{% trans "Войти" %}</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

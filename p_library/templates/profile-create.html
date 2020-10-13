@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  {% if user.profile%}
+    <h3 class="text-center mt-5"><a class="text-info" href="/links">Перейти к приложению</a></h3>
+  {% else %}
+  <div class="mx-auto mt-5" style="width: 200px;">
+    <p class="text-center">Введите ваш возраст, для создания профиля:</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="d-flex justify-content-center">
+            <input class="btn btn-primary" type="submit" value="Создать профиль">
+        </div>
+    </form>
+  </div>
+  {% endif %}
+{% endblock %}

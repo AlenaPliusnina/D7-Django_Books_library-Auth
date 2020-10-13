@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Links</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div class="ml-5 mr-5 mt-5 text-center list-group list-group-flush">
+        <h4 class="alert alert-dark">
+            {% if user.is_superuser %}
+                <a class="list-group-item text-info" href="/admin/">Административная панель</a>
+                <a class="list-group-item text-info" href="/author/create/">Создать автора</a>
+                <a class="list-group-item text-info" href="/author/create_many/">Создать несколько авторов</a>
+                <a class="list-group-item text-info" href="/author_book/create_many/">Создать несколько авторов и их книг</a>
+                <a class="list-group-item text-info" href="/friends/create">Добавить друга</a>
+            {% endif %}
+            <a class="list-group-item text-info" href="/books_list_index/">Список доступных книг</a>
+            <a class="list-group-item text-info" href="/publishers/">Издательства</a>
+            <a class="list-group-item text-info" href="/authors/">Список авторов</a>
+            <a class="list-group-item text-info" href="/friends/">Список друзей, одолживших книги</a>
+        </h4>
+    </div>
+
+    <div class="ml-5 mt-3">
+        <a class="btn-lg btn-info" href="/">Главная</a>
+        <a class="btn-lg btn-info" href="/accounts/logout/">Выйти</a>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if username %}
+    <div class="text-center mt-5 text-muted">
+        <h1>Привет, {{ username }}! Я знаю сколько тебе лет - {{ age }}.</h1>
+            {% if github_url %}
+                <h3 class="mt-4">И у меня есть ссылка на твой профиль на <a href="{{ github_url }}">github</a>!</h3>
+            {% endif %}
+        <h3 class="mt-4"><a href="/links">Перейти к приложению</a></h3>
+	    <p class="mt-4">Тут ты можешь <a href="/accounts/logout">выйти</a>.</p>
+    </div>
+{% else %}
+<h4 class="mt-5 text-center">Привет! Тебе нужно <a href="/accounts/signup">зарегистрироваться</a>
+        или <a href="/accounts/login">войти на сайт</a>!</h4>
+    <p class="mt-2 text-center">* Войти на сайт можно через аккаунт на GitHub.</p>
+{% endif %}
+{% endblock %}

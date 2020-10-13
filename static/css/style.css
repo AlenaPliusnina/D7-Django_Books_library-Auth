@@ -1,0 +1,12 @@
+.page-header {
+    background: #6D757D;
+    margin: 0 0 0 0;
+}
+
+.page-header-text {
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 0;
+}

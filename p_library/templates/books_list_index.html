@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Library</title>
+</head>
+<body class="bg-light">
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h1 class="text-center text-secondary mt-3">Добро пожаловать в {{ title }}.</h1>
+    <h4 class="text-center text-secondary mt-2 mb-3">Тут собрано {{ books|length }} книг из моей личной коллекции.</h4>
+
+    <table  class="table table-striped table-dark">
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td><img src='/media/{{ book.image }}' width="100" height="150" alt="Обложка книги"/></td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.ISBN }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.year_release }}</td>
+                <td>{{ book.author.full_name }}</td>
+                <td>{{ book.author.country }}</td>
+                <td>{{ book.copy_count }}</td>
+                {% if user.is_superuser %}
+                <td>
+                    <form action="/index/book_increment/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{book.id}}" />
+                        <input class="btn btn-success pr-3 mb-2" type="submit" value="Увеличить кол-во" />
+                    </form>
+                    <form action="/index/book_decrement/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{book.id}}" />
+                        <input class="btn btn-danger" type="submit" value="Уменьшить кол-во" />
+                    </form>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+</body>
+</html>
+
+
+<!-- Выводим числа от 1 до 100 которые делятся на 3   -->
+<!--    <div class="pl-3 pt-2 pb-2 mb-3 bg-info text-light"> Числа от 1 до 100 которые делятся на 3:-->
+<!--        {% for i in "x"|rjust:"100" %}-->
+<!--            {% if forloop.counter|divisibleby:"3" %}-->
+<!--              {{ forloop.counter }};-->
+<!--            {% endif %}-->
+<!--        {% endfor %}-->
+<!--    </div>-->
