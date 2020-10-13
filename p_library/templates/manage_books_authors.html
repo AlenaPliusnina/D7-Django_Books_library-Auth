@@ -8,6 +8,7 @@
     {% extends 'base.html' %}
 
     {% block content %}
+    {% if user.is_superuser %}
     <div class="ml-3">
             <form method="post">
                 {% csrf_token %}
@@ -27,6 +28,9 @@
                 <input type="submit" value="Сохранить"/>
         </form>
     </div>
+    {% else %}
+    <h5 class="text-center mt-5">У вас нет доступа. Для редактирования войдите от имени суперпользователя.</h5>
+    {% endif %}
     {% endblock %}
 </body>
 </html>

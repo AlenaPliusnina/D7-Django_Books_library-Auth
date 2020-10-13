@@ -10,7 +10,7 @@ from p_library.forms import AuthorForm, BookForm, FriendForm, ProfileCreationFor
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
 from django.forms import formset_factory
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, JsonResponse
 from allauth.account.views import SignupView, LoginView, LogoutView
 
 
@@ -168,6 +168,9 @@ def author_create_many(request):
     #  Наш обработчик будет обрабатывать и GET и POST запросы.
     # POST запрос будет содержать в себе уже заполненные данные формы
     if request.method == 'POST':
+        user = request.user
+        if not user.is_superuser:
+            return JsonResponse(data={"error": "У вас нет доступа"}, status=403)
 
         #  Здесь мы заполняем формы формсета теми данными, которые пришли в запросе.
         #  Обратите внимание на параметр `prefix`. Мы можем иметь на странице не только несколько форм,
@@ -195,6 +198,10 @@ def books_authors_create_many(request):
     AuthorFormSet = formset_factory(AuthorForm, extra=2)
     BookFormSet = formset_factory(BookForm, extra=2)
     if request.method == 'POST':
+        user = request.user
+        if not user.is_superuser:
+            return JsonResponse(data={"error": "У вас нет доступа"}, status=403)
+
         author_formset = AuthorFormSet(request.POST, request.FILES, prefix='authors')
         book_formset = BookFormSet(request.POST, request.FILES, prefix='books')
         if author_formset.is_valid() and book_formset.is_valid():
