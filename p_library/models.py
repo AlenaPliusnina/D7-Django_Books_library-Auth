@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
-    age = models.IntegerField(null=True)
+    age = models.PositiveIntegerField(null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
 
