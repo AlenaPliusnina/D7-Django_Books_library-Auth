@@ -9,7 +9,7 @@
 
     {% block content %}
     {% if user.is_superuser %}
-    <div class="ml-3">
+    <div class="ml-3 mt-3">
         <form method="post">
 	        {% csrf_token %}
 	        {{ form.as_p }}
