@@ -14,7 +14,7 @@
             {% csrf_token %}
             {{ author_formset.management_form }}
             {% for form in author_formset %}
-                {{ form.as_ul }}
+                {{ form.as_p }}
                 <br>
             {% endfor %}
             <input type="submit" value="Сохранить"/>
