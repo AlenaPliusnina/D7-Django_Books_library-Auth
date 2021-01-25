@@ -6,6 +6,8 @@
 
       Django, Sqlite3, Bootstrap, Django AllAuth
       
+Проект также размещен на Heroku: http://still-springs-01596.herokuapp.com/
+
 Описание:
 
       Приложение — личная библиотека. Это простая система, в которой храниться и отображаться информация о книгах, 
